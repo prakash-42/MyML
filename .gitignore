@@ -1,0 +1,13 @@
+# Exclude env folder
+env/
+
+.idea/
+tut/
+filetest/
+media/
+website/db.sqlite3
+eve/Eve_ML/
+*.pyc
+eve/migrations/
+home/migrations/
+db.sqlite3

@@ -1,0 +1,27 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="{% static 'eve/css/canvas.css' %}" />
+    <title>MyML - Eve</title>
+</head>
+<body>
+<h1>
+    Hello, world. You're at the Eve home.
+</h1>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src = "{% static 'eve/js/canvas.js' %}"></script>
+
+<canvas id="myCanvas" width="200" height="100"
+style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+<br><br>
+<button onclick="UploadPic()">Submit Drawing</button>
+<br><br>
+<div><h1 id="prediction"></h1></div>
+</body>
+</html>
