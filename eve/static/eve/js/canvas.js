@@ -1,5 +1,4 @@
 // https://www.youtube.com/watch?v=3GqUM4mEYKA
-
 window.addEventListener('load', (x, y) => {
   console.log('hello there!');
   const canvas = document.querySelector('#myCanvas');
@@ -8,6 +7,10 @@ window.addEventListener('load', (x, y) => {
   // Resizing
   canvas.height = 250;
   canvas.width = 250;
+
+  // A comment on answer https://stackoverflow.com/q/33910742 for below two lines
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
   let painting = false;
 
@@ -23,8 +26,9 @@ window.addEventListener('load', (x, y) => {
 
   function draw(e){
     if(!painting) return;
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 20;
     ctx.lineCap = "round";
+
     let xpos = getMousePos(canvas, e).x;
     let ypos = getMousePos(canvas, e).y;
     ctx.lineTo(xpos, ypos);
@@ -57,8 +61,8 @@ function UploadPic() {
 
   console.log('I have the image here will submit now!');
 
+  /* Discarding this method of interacting with server due to reason in below link
   let xhr = new XMLHttpRequest();
-
 
   let data = new FormData();
   data.append("file", Pic);
@@ -76,8 +80,26 @@ function UploadPic() {
   console.log(typeof obj);
 
   let prediction = "2";
-  result.innerHTML = "Eve thinks you entered " + obj.prediction;
+  result.innerHTML = "Eve thinks you entered " + obj.prediction; // */
 
+  jQuery.ajax({
+    type: 'POST',
+    url: 'upload/',
+    // data: data,
+    data: '{"file": "' + Pic + '", "remark": "My Canvas submission"}',
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    success: function(data, textStatus, jqXHR)
+    {
+      //data - response from server
+      console.log(data);
+      let result = document.getElementById("prediction");
+      result.innerHTML = "Eve thinks you entered " + data.prediction;
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
 
+    }
+  });
 
 }

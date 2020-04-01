@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  padding: 5px;
+  padding: 5px; /* TODO Add correction for this in canvas.js file for precise drawing */
   box-sizing: border-box;
 }
 

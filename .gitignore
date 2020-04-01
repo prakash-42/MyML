@@ -4,9 +4,10 @@ env/
 .idea/
 tut/
 filetest/
-website/media/
+media/
 website/db.sqlite3
-/Eve/
+eve/Eve_ML/
 *.pyc
-website/eve/migrations/
-website/home/migrations/
+eve/migrations/
+home/migrations/
+db.sqlite3
