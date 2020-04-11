@@ -58,7 +58,10 @@ class FileUploadView(APIView):
             # return HttpResponse(serializer.serialize([file_obj]), status=status.HTTP_201_CREATED)
 
             # Approach 4: Maybe not the best one, but it works!
-            response = '{ "cloudUrl": "' + file_obj.cloudUrl + '", "prediction": "' + str(file_obj.prediction) + '"}'
+            response_id = '"id": "' + str(file_obj.id) + '"'
+            response_cloud_url = '"cloudUrl": "' + file_obj.cloudUrl + '"'
+            response_prediction = '"prediction": "' + str(file_obj.prediction) + '"'
+            response = '{ ' + response_id + ', ' + response_cloud_url + ', ' + response_prediction + '}'
             return HttpResponse(response, status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
