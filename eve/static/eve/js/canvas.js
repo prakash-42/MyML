@@ -61,7 +61,7 @@ function UploadPic() {
 
   console.log('I have the image here will submit now!');
 
-  /* Discarding this method of interacting with server due to reason in below link
+  /* Discarding this method of interacting with server to avoid turning async to false
   let xhr = new XMLHttpRequest();
 
   let data = new FormData();
@@ -98,6 +98,10 @@ function UploadPic() {
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
+      console.log("Error occurred!!");
+      console.log(jqXHR);
+      console.log(textStatus);
+      console.log(errorThrown);
 
     }
   });
