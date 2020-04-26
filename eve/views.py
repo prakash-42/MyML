@@ -17,6 +17,7 @@ from tensorflow.keras.models import model_from_json
 from .serializers import FileSerializer
 from .models import File
 from .imageprep import *
+from .file_handler import *
 
 def index(request):
     context = {'key': 'value'}
@@ -71,12 +72,6 @@ class FileUploadView(APIView):
 class MySerializer(Serializer):
     def end_object(self, obj):
         self.objects.append(self._current)
-
-
-def upload_to_cloudinary(file):
-    print('file passed: ', file)
-    url = "final_file_public_url"
-    return url, True
 
 
 def get_prediction_from_probabilities(predictions):

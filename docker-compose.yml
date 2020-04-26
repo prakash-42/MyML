@@ -10,11 +10,16 @@ services:
       - $HOME/docker/volumes/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: docker
+
   web:
     build: .
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     container_name: MyML
+    env_file:
+      env_varibles.env
     volumes:
       - .:/MyML
     ports:
       - "8000:8000"
+    depends_on:
+      - "postgres"

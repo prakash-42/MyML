@@ -11,3 +11,4 @@ eve/Eve_ML/
 eve/migrations/
 home/migrations/
 db.sqlite3
+*.env
