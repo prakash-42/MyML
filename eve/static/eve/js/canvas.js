@@ -53,6 +53,27 @@ window.addEventListener('load', (x, y) => {
 
 });
 
+var pkid;
+
+function feedback() {
+  let x = document.getElementById("userSuggestion").value;
+  $.ajax({type: 'POST',
+                url: '/feedback/',                            // some data url
+                data: {suggestion: 'x', keyid: 'pkid'},       // some params  
+                success: function (response) {                  // callback
+                    if (response.result === 'OK') {
+                        if (response.data && typeof(response.data) === 'object') {
+                            // do something with the successful response.data
+                            // e.g. response.data can be a JSON object
+                        }
+                    } else {
+                        // handle an unsuccessful response
+                    }
+                }
+               });
+}
+
+
 // https://www.codicode.com/art/upload_and_save_a_canvas_image_to_the_server.aspx
 function UploadPic() {
     // Generate the image data
