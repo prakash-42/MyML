@@ -111,3 +111,19 @@ def make_prediction(file):
     print('prediction: ', prediction)
 
     return get_prediction_from_probabilities(prediction[0])
+
+
+def feedback(request):
+     if request.is_ajax():
+        # extract your params (also, remember to validate them)
+        userSugggestion = request.POST.get('suggestion', None)
+        pkid = request.POST.get('keyid', None)
+        entry=File.objects.get(pk=pkid)
+        entry.userSuggestion = userSugggestion;
+        entry.save();
+        # construct your JSON response by calling a data method from elsewhere
+        items, summary = build_my_response(suggestion, keyid)
+
+        return JsonResponse({'result': 'OK', 'data': {'items': items, 'summary': summary}})
+    return HttpResponseBadRequest()
+
