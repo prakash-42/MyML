@@ -1,6 +1,7 @@
 {% load static %}
 
 <html lang="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +21,61 @@ style="border:1px solid #c3c3c3;">
 Your browser does not support the canvas element.
 </canvas>
 <br><br>
-<button onclick="UploadPic()">Submit Drawing</button>
+<div ng-app="myApp" ng-init="display=0" ng-controller="myCtrl">
+<button onclick="UploadPick()" ng-click="myFunc()">Submit Drawing</button>
+
+    <div ng-show="showMe">
+    <form>
+        Was the prediction correct:
+        <input type="radio" ng-model="myVar" value="Yes">Yes
+        <input type="radio" ng-model="myVar" value="No">No
+      </form>
+      <div ng-switch="myVar">
+        <div ng-switch-when="Yes">
+           <p>Thank You.</p>
+        </div>
+        <div ng-switch-when="No">
+           
+           <p>What did you enter.</p>
+           <form action="feedback()" method="POST" id="feedback">
+            {% csrf_token %}
+           <input type="text" id="userSuggestion" placeholder="Enter your number">
+           <input type="submit" ng-click="myFunc()">
+           </form>
+        </div>
+      </div>
+      </div>
+      </div>
+      <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+          $scope.showMe = false;
+          $scope.myFunc = function() {
+            $scope.showMe = !$scope.showMe;
+          }
+        });
+        </script>
+   <!--     <script type="text/javascript">
+          $(document).on('submit', '#feedback',function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'POST',
+                url:'{% url "create" %}',
+                data:{
+                    userSuggestion:$('#userSuggestion').val(),
+                    file:$('#file').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success:function(json){
+                    document.getElementById("feedback").reset();
+                },
+                error : function(xhr,errmsg,err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+            });
+        });
+        </script>       -->
 <br><br>
 <div><h1 id="prediction"></h1></div>
 </body>
