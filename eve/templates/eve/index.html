@@ -55,27 +55,6 @@ Your browser does not support the canvas element.
           }
         });
         </script>
-   <!--     <script type="text/javascript">
-          $(document).on('submit', '#feedback',function(e){
-            e.preventDefault();
-            $.ajax({
-                type:'POST',
-                url:'{% url "create" %}',
-                data:{
-                    userSuggestion:$('#userSuggestion').val(),
-                    file:$('#file').val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-                    action: 'post'
-                },
-                success:function(json){
-                    document.getElementById("feedback").reset();
-                },
-                error : function(xhr,errmsg,err) {
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
-            });
-        });
-        </script>       -->
 <br><br>
 <div><h1 id="prediction"></h1></div>
 </body>
