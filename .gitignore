@@ -6,7 +6,9 @@ tut/
 filetest/
 media/
 website/db.sqlite3
-eve/Eve_ML/
+eve/ML Code/Data
+eve/ML Code/main.py
+eve/ML Code/model.*
 *.pyc
 eve/migrations/
 home/migrations/
