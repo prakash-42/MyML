@@ -7,12 +7,12 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from rest_framework.response import Response
 from rest_framework import status
-import json
-import simplejson
-
-import tensorflow as tf
-import numpy as np
-from tensorflow.keras.models import model_from_json
+# import json
+# import simplejson
+#
+# import tensorflow as tf
+# import numpy as np
+# from tensorflow.keras.models import model_from_json
 
 from .serializers import FileSerializer
 from .models import File
@@ -81,40 +81,41 @@ def get_prediction_from_probabilities(predictions):
 
 
 def make_prediction(file):
-    print(file)
-    image_data = imageprepare(file)
-    input_data_2d = get_2d_from_list(image_data, 28, 28)
-
-    for i in range(28):
-        for j in range(28):
-            print(image_data[i * 28 + j], end='\t')
-        print('')
-
-    numpy_array_3d = np.array([input_data_2d], dtype=np.uint8)
-
-    # Serialising the model now
-    path = 'eve/'
-
-    json_file = open(path + 'model.json', 'r')
-    loaded_model_json = json_file.read()
-    json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
-    # load weights into new model
-    loaded_model.load_weights(path + "model.h5")
-    print("Loaded model from disk")
-
-    loaded_model.compile(optimizer=tf.optimizers.Adam(),
-                         loss='sparse_categorical_crossentropy',
-                         metrics=['accuracy'])
-
-    prediction = loaded_model.predict(numpy_array_3d)
-    print('prediction: ', prediction)
-
-    return get_prediction_from_probabilities(prediction[0])
+    # print(file)
+    # image_data = imageprepare(file)
+    # input_data_2d = get_2d_from_list(image_data, 28, 28)
+    #
+    # for i in range(28):
+    #     for j in range(28):
+    #         print(image_data[i * 28 + j], end='\t')
+    #     print('')
+    #
+    # numpy_array_3d = np.array([input_data_2d], dtype=np.uint8)
+    #
+    # # Serialising the model now
+    # path = 'eve/'
+    #
+    # json_file = open(path + 'model.json', 'r')
+    # loaded_model_json = json_file.read()
+    # json_file.close()
+    # loaded_model = model_from_json(loaded_model_json)
+    # # load weights into new model
+    # loaded_model.load_weights(path + "model.h5")
+    # print("Loaded model from disk")
+    #
+    # loaded_model.compile(optimizer=tf.optimizers.Adam(),
+    #                      loss='sparse_categorical_crossentropy',
+    #                      metrics=['accuracy'])
+    #
+    # prediction = loaded_model.predict(numpy_array_3d)
+    # print('prediction: ', prediction)
+    #
+    # return get_prediction_from_probabilities(prediction[0])
+    return 5
 
 
 def feedback(request):
-     if request.is_ajax():
+    if request.is_ajax():
         # extract your params (also, remember to validate them)
         userSugggestion = request.POST.get('suggestion', None)
         pkid = request.POST.get('keyid', None)
